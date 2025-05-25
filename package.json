@@ -1,0 +1,17 @@
+{
+  "name": "sqlcik",
+  "version": "1.0.0",
+  "description": "## Roadmap -[] main.ts (REPL) -[] parser.ts (tokenize SQL) -[] engine.ts (execute queries) -[] storage.ts (manage disk storage) -[] types.ts (global types)",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "ts-node main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
