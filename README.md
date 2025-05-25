@@ -1,7 +1,7 @@
 # Sqlcik
 
 ## Roadmap
--[] main.ts (REPL)
+-[x] main.ts (REPL)
 -[] parser.ts (tokenize SQL)
 -[] engine.ts (execute queries)
 -[] storage.ts (manage disk storage)
