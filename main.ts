@@ -1,7 +1,7 @@
 // REPL (READ, EVAL, PRINT, LOOP) main shell of sqlcik
 import readline from "readline";
 import { parseCommand } from "./parser";
-import { save } from "./database";
+import { save, get } from "./database";
 
 const rl = readline.createInterface({
     input:process.stdin,
@@ -23,6 +23,8 @@ rl.on("line",(line) => {
 
     if(parsedCommand.commandType == "insert"){
         save(parsedCommand.user)
+    } else if (parsedCommand.commandType == "select"){
+        get(parsedCommand.user.id)
     }
     console.log(parsedCommand)
     rl.prompt()

@@ -25,3 +25,21 @@ export function save(user:User): EngineResponse {
     console.log(users)
     return {"status":"sucsess",user}
 }
+
+// supports only get by id
+export function get(id:String): EngineResponse {
+    const usersFile = fs.readFileSync('./users.json', 'utf-8');
+    const users = JSON.parse(usersFile);
+
+    let usersObjectList = users[0]
+    for(let i = 0;i<usersObjectList.lenght;i++){
+        if(usersObjectList[i].id == id){
+            return {"status":"sucsess","user": usersObjectList[i]}
+        }
+    }
+    let nullUser:User = {id:"null", name: "null", surname: "null",
+        age: "null"}
+    return {"status":"failed: provided ID is not valid ", "user": nullUser}
+
+
+}
