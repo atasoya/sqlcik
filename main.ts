@@ -1,6 +1,7 @@
 // REPL (READ, EVAL, PRINT, LOOP) main shell of sqlcik
 import readline from "readline";
 import { parseCommand } from "./parser";
+import { save } from "./database";
 
 const rl = readline.createInterface({
     input:process.stdin,
@@ -19,6 +20,10 @@ rl.on("line",(line) => {
     }
     console.log(`Command: ${input}`)
     let parsedCommand = parseCommand(input)
+
+    if(parsedCommand.commandType == "insert"){
+        save(parsedCommand.user)
+    }
     console.log(parsedCommand)
     rl.prompt()
 });
