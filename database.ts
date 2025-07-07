@@ -27,13 +27,12 @@ export function save(user:User): EngineResponse {
 }
 
 // supports only get by id
-export function get(id:String): EngineResponse {
+export function getUser(id:String): EngineResponse {
     const usersFile = fs.readFileSync('./users.json', 'utf-8');
     const users = JSON.parse(usersFile);
-
-    let usersObjectList = users[0]
-    for(let i = 0;i<usersObjectList.lenght;i++){
-        if(usersObjectList[i].id == id){
+    let usersObjectList = users
+    for(let i = 0;i<usersObjectList.length;i++){
+        if(usersObjectList[i].id === id){
             return {"status":"sucsess","user": usersObjectList[i]}
         }
     }
