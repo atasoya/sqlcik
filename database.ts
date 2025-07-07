@@ -12,7 +12,6 @@ export function save(user:User): EngineResponse {
     // save file 
     // TODO: check if id is unique when get is done
     users.push(user)
-    console.log("users :",users)
 
     fs.writeFile("users.json", JSON.stringify(users), 'utf8', (err) => {
         if (err) {
@@ -22,7 +21,6 @@ export function save(user:User): EngineResponse {
         }
     })
     // close file
-    console.log(users)
     return {"status":"sucsess",user}
 }
 
