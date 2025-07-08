@@ -40,3 +40,26 @@ export function getUser(id:String): EngineResponse {
 
 
 }
+
+export function deleteUser(id:String): EngineResponse {
+    const usersFile = fs.readFileSync('./users.json', 'utf-8');
+    const users = JSON.parse(usersFile);
+    let usersObjectList = users
+    for(let i = 0;i<usersObjectList.length;i++){
+        if(usersObjectList[i].id === id){
+            users.pop(usersObjectList[i])
+            fs.writeFile("users.json", JSON.stringify(users), 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing to file', err);
+            } else {
+                console.log('Data written to file');
+            }
+                })
+            return {"status":"sucsess","user": usersObjectList[i]}
+        }
+    }
+    let nullUser:User = {id:"null", name: "null", surname: "null",
+        age: "null"}
+    return {"status":"failed: provided ID is not valid ", "user": nullUser}
+
+}
