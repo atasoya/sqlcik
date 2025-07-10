@@ -1,5 +1,6 @@
-// TODO: implement save, delete, get, getAll
-// all file engine related functions are stored here
+// TODO: implement save, delete, get, getAll, DONE
+// TODO: add UPDATE
+// all file engine related functions are stored here 
 import { EngineResponse, User } from "./types";
 import fs from "node:fs"
 
@@ -16,12 +17,10 @@ export function save(user:User): EngineResponse {
     fs.writeFile("users.json", JSON.stringify(users), 'utf8', (err) => {
         if (err) {
             console.error('Error writing to file', err);
-        } else {
-            console.log('Data written to file');
         }
     })
     // close file
-    return {"status":"sucsess",user}
+    return {"status":"success",user}
 }
 
 // supports only get by id
@@ -31,7 +30,7 @@ export function getUser(id:String): EngineResponse {
     let usersObjectList = users
     for(let i = 0;i<usersObjectList.length;i++){
         if(usersObjectList[i].id === id){
-            return {"status":"sucsess","user": usersObjectList[i]}
+            return {"status":"success","user": usersObjectList[i]}
         }
     }
     let nullUser:User = {id:"null", name: "null", surname: "null",
@@ -47,19 +46,25 @@ export function deleteUser(id:String): EngineResponse {
     let usersObjectList = users
     for(let i = 0;i<usersObjectList.length;i++){
         if(usersObjectList[i].id === id){
-            users.pop(usersObjectList[i])
+            let deletedUser = usersObjectList[i]
+            users.splice(i,1) // TODO: bug with user delete with id's DONE
             fs.writeFile("users.json", JSON.stringify(users), 'utf8', (err) => {
             if (err) {
                 console.error('Error writing to file', err);
-            } else {
-                console.log('Data written to file');
             }
                 })
-            return {"status":"sucsess","user": usersObjectList[i]}
+            return {"status":"success","user": deletedUser}
         }
     }
     let nullUser:User = {id:"null", name: "null", surname: "null",
         age: "null"}
     return {"status":"failed: provided ID is not valid ", "user": nullUser}
 
+}
+
+export function getAll() {
+    const usersFile = fs.readFileSync('./users.json', 'utf-8');
+    const users = JSON.parse(usersFile);
+    let usersObjectList = users
+    return {"status":"success","users":usersObjectList}
 }

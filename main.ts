@@ -1,7 +1,7 @@
 // REPL (READ, EVAL, PRINT, LOOP) main shell of sqlcik
 import readline from "readline";
 import { parseCommand } from "./parser";
-import { save, getUser, deleteUser } from "./database";
+import { save, getUser, deleteUser, getAll } from "./database";
 const rl = readline.createInterface({
     input:process.stdin,
     output:process.stdout,
@@ -26,6 +26,8 @@ rl.on("line",(line) => {
        result = getUser(parsedCommand.user.id)
     } else if(commandType == "delete"){
         result = deleteUser(parsedCommand.user.id)
+    } else if (commandType == "all"){
+        result = getAll()
     }
     console.log(result)
     rl.prompt()
