@@ -4,7 +4,7 @@
 
 # Sqlcik
 
-Very small (I mean very small) SQL Lite clone in Typescript.
+Very small (I mean very small) SQLite clone in Typescript.
 
 - [x] No AI
 - [x] Only NeoVim
@@ -13,7 +13,7 @@ Very small (I mean very small) SQL Lite clone in Typescript.
 # Features
 
 - REPL for interacting with user
-- Parser to tokenize the user promts like `insert` and `update`
+- Parser to tokenize the user prompts like `insert` and `update`
 - Support for `insert`, `update`, `delete`, `select`, `all`
 
 # What I learned
