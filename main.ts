@@ -1,7 +1,7 @@
 // REPL (READ, EVAL, PRINT, LOOP) main shell of sqlcik
 import readline from "readline";
 import { parseCommand } from "./parser";
-import { save, getUser, deleteUser, getAll } from "./database";
+import { save, getUser, deleteUser, getAll, updateUser } from "./database";
 const rl = readline.createInterface({
     input:process.stdin,
     output:process.stdout,
@@ -28,6 +28,10 @@ rl.on("line",(line) => {
         result = deleteUser(parsedCommand.user.id)
     } else if (commandType == "all"){
         result = getAll()
+    } else if (commandType == "update"){
+        result = updateUser(parsedCommand.user)
+    } else {
+        result = "Error: undefined command"
     }
     console.log(result)
     rl.prompt()

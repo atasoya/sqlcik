@@ -68,3 +68,18 @@ export function getAll() {
     let usersObjectList = users
     return {"status":"success","users":usersObjectList}
 }
+
+export function updateUser(user:User) {
+    const usersFile = fs.readFileSync('./users.json', 'utf-8');
+    const users = JSON.parse(usersFile);
+    let usersObjectList = users
+    for(let i = 0;i<usersObjectList.length;i++){
+        if(usersObjectList[i].id === user.id){
+            usersObjectList[i] = user
+            fs.writeFile("users.json", JSON.stringify(users), 'utf8', (err) => {
+            if (err) {
+            console.error('Error writing to file', err);}})
+            return {"status":"success","user": usersObjectList[i] }
+        }
+    }
+}
